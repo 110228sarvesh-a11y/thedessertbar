@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://110228sarvesh-a11y.github.io/thedessertbar/sitemap.xml
