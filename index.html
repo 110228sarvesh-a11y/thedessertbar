@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dessert Bar | Cakes & Sweet Creations</title>
+  <meta name="description" content="The Dessert Bar — handcrafted cakes, cupcakes, brownies and custom celebration desserts.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="announcement">Handcrafted with love ✦ Made for your sweetest moments</div>
+
+  <header class="site-header">
+    <a href="#home" class="brand">
+      <img src="images/logo-clean.png" alt="The Dessert Bar logo">
+      <span>The Dessert Bar</span>
+    </a>
+
+    <nav id="mainNav">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#shop">Shop</a>
+      <a href="#creations">Creations</a>
+      <a href="#occasions">Occasions</a>
+      <a href="#bulk">Bulk & Events</a>
+      <a href="#about">Our Story</a>
+      <a href="#order">Order</a>
+    </nav>
+
+    <a class="instagram-btn" href="https://www.instagram.com/_.thedessertbar._" target="_blank" rel="noopener">
+      Instagram ↗
+    </a>
+
+    <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">THE DESSERT BAR ✦</p>
+        <h1>Little moments<br><em>deserve something sweet.</em></h1>
+        <p class="hero-text">
+          Custom cakes, indulgent brownies, delicate cupcakes and dessert creations
+          made to turn ordinary celebrations into memories.
+        </p>
+        <div class="hero-actions">
+          <a href="#creations" class="btn primary">Explore our creations <span>→</span></a>
+          <a href="#order" class="btn ghost">Order a custom cake</a>
+        </div>
+        <div class="mini-note">
+          <span>♡</span>
+          Freshly crafted • Custom designs • Celebration ready
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="arch">
+          <img src="images/ferrero-cake.jpg" alt="Nutella Ferrero cake">
+        </div>
+        <div class="floating-tag top">CUSTOM<br><b>CAKES</b></div>
+        <div class="floating-tag bottom">BAKED<br><b>WITH LOVE</b></div>
+        <div class="doodle one">✦</div>
+        <div class="doodle two">♡</div>
+      </div>
+    </section>
+
+    <section class="intro section">
+      <div>
+        <p class="eyebrow">A SWEET LITTLE WORLD</p>
+        <h2>Made to look beautiful.<br><em>Made to taste even better.</em></h2>
+      </div>
+      <p>
+        From floral buttercream cakes to chocolate-loaded treats, every creation
+        is designed with a little personality. Pick a favourite, bring us an idea,
+        or let us create something special for your occasion.
+      </p>
+    </section>
+
+
+    <section class="menu section" id="menu">
+      <div class="section-heading">
+        <p class="eyebrow">THE SWEET MENU</p>
+        <h2>Pick your <em>kind of happy.</em></h2>
+        <p>Choose a category and explore the kind of dessert you're craving.</p>
+      </div>
+
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="menu-photo"><img src="images/ferrero-cake.jpg" alt="Custom celebration cake"></div>
+          <div class="menu-card-body">
+            <span class="menu-number">01 / CAKES</span>
+            <h3>Celebration Cakes</h3>
+            <p>Floral, chocolate, themed and custom cakes made for birthdays and special days.</p>
+            <a href="#order" class="menu-link" data-product="Celebration Cake">Enquire for a cake →</a>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-photo"><img src="images/wedding-cake.jpg" alt="Two tier wedding cake"></div>
+          <div class="menu-card-body">
+            <span class="menu-number">02 / WEDDINGS</span>
+            <h3>Wedding Cakes</h3>
+            <p>Elegant tiered creations designed around your colours, flowers and celebration.</p>
+            <a href="#order" class="menu-link" data-product="Wedding Cake">Plan your cake →</a>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-photo"><img src="images/cupcake-box.jpg" alt="Assorted cupcakes"></div>
+          <div class="menu-card-body">
+            <span class="menu-number">03 / CUPCAKES</span>
+            <h3>Cupcakes</h3>
+            <p>Pretty little bites for parties, gifting, dessert tables or simply because.</p>
+            <a href="#order" class="menu-link" data-product="Cupcakes">Enquire for cupcakes →</a>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-photo"><img src="images/brownies.jpg" alt="Loaded chocolate brownies"></div>
+          <div class="menu-card-body">
+            <span class="menu-number">04 / BROWNIES</span>
+            <h3>Loaded Brownies</h3>
+            <p>Rich chocolate brownies finished with indulgent toppings and drizzles.</p>
+            <a href="#order" class="menu-link" data-product="Loaded Brownies">Enquire for brownies →</a>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-photo"><img class="zoomable" src="images/tiramisu.jpg" alt="Tiramisu cake"></div>
+          <div class="menu-card-body">
+            <span class="menu-number">05 / SPECIALS</span>
+            <h3>Dessert Specials</h3>
+            <p>From tiramisu to seasonal favourites, discover something beyond the usual cake.</p>
+            <a href="#order" class="menu-link" data-product="Dessert Special">Ask about specials →</a>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-photo"><img src="images/berry-cake.jpg" alt="Berry loaded cake"></div>
+          <div class="menu-card-body">
+            <span class="menu-number">06 / CUSTOM</span>
+            <h3>Your Idea, Your Cake</h3>
+            <p>Have a reference picture or a completely new idea? Let's create it together.</p>
+            <a href="#order" class="menu-link" data-product="Custom Cake">Start a custom order →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="menu-note">
+        <span>♡</span>
+        <div><strong>Prices are custom quoted.</strong><br>Share your flavour, size, design and date through the enquiry form.</div>
+      </div>
+    </section>
+
+    <section class="signature-menu section" id="signature-menu">
+      <div class="section-heading">
+        <p class="eyebrow">JUST BAKED</p>
+        <h2>Our signature <em>selection</em></h2>
+        <p>Real creations from The Dessert Bar. Choose a favourite and enquire directly on WhatsApp.</p>
+      </div>
+
+      <div class="filter-bar" aria-label="Filter desserts">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="cake">Cakes</button>
+        <button class="filter" data-filter="brownie">Brownies</button>
+      </div>
+
+      <div class="signature-grid">
+        <article class="signature-card" data-category="cake">
+          <div class="signature-photo"><img src="images/signature-tiered.jpg" alt="Turquoise and white two tier celebration cake"></div>
+          <div class="signature-body"><span>CAKE · CUSTOM</span><h3>Turquoise Celebration Cake</h3><p>Elegant two-tier design with floral details and gold accents.</p><div class="card-bottom"><strong>Price on request</strong><a href="#order" class="order-mini" data-product="Turquoise Celebration Cake">Order →</a></div></div>
+        </article>
+
+        <article class="signature-card" data-category="cake">
+          <div class="signature-photo"><img src="images/mango-cream-cake.jpg" alt="White cream cake with mango topping"></div>
+          <div class="signature-body"><span>CAKE · FRUIT</span><h3>Mango Cream Cake</h3><p>Soft cream finish with a bright mango topping and delicate decoration.</p><div class="card-bottom"><strong>Price on request</strong><a href="#order" class="order-mini" data-product="Mango Cream Cake">Order →</a></div></div>
+        </article>
+
+        <article class="signature-card" data-category="cake">
+          <div class="signature-photo"><img src="images/blue-birthday-new.jpg" alt="Blue birthday cake with candles"></div>
+          <div class="signature-body"><span>CAKE · BIRTHDAY</span><h3>Blue Birthday Cake</h3><p>A cheerful blue celebration cake finished with piped flowers and a personal message.</p><div class="card-bottom"><strong>Price on request</strong><a href="#order" class="order-mini" data-product="Blue Birthday Cake">Order →</a></div></div>
+        </article>
+
+        <article class="signature-card" data-category="cake">
+          <div class="signature-photo"><img src="images/black-chocolate-cake.jpg" alt="Black chocolate celebration cake with chocolate decorations"></div>
+          <div class="signature-body"><span>CAKE · CHOCOLATE</span><h3>Black Chocolate Cake</h3><p>A bold chocolate design finished with creamy swirls, chocolate pieces and gold touches.</p><div class="card-bottom"><strong>Price on request</strong><a href="#order" class="order-mini" data-product="Black Chocolate Cake">Order →</a></div></div>
+        </article>
+
+        <article class="signature-card" data-category="brownie">
+          <div class="signature-photo"><img src="images/kitkat-brownies.jpg" alt="Loaded chocolate brownies topped with chocolate bars"></div>
+          <div class="signature-body"><span>BROWNIE · LOADED</span><h3>Chocolate Bar Brownies</h3><p>Fudgy brownies loaded with chocolate drizzle, chocolate bars and crunchy toppings.</p><div class="card-bottom"><strong>Price on request</strong><a href="#order" class="order-mini" data-product="Chocolate Bar Brownies">Order →</a></div></div>
+        </article>
+
+        <article class="signature-card" data-category="brownie">
+          <div class="signature-photo"><img src="images/loaded-brownies.jpg" alt="Loaded chocolate brownies with drizzle and chocolate pieces"></div>
+          <div class="signature-body"><span>BROWNIE · LOADED</span><h3>Loaded Chocolate Brownies</h3><p>Rich chocolate brownies finished with glossy drizzle, chocolate bites and silver pearls.</p><div class="card-bottom"><strong>Price on request</strong><a href="#order" class="order-mini" data-product="Loaded Chocolate Brownies">Order →</a></div></div>
+        </article>
+
+        <article class="signature-card" data-category="brownie">
+          <div class="signature-photo"><img src="images/classic-brownies.jpg" alt="Classic chocolate brownies with white chocolate chips"></div>
+          <div class="signature-body"><span>BROWNIE · BOX</span><h3>Classic Brownie Box</h3><p>Dark, fudgy brownies finished with chocolate drizzle and white chocolate chips.</p><div class="card-bottom"><strong>Price on request</strong><a href="#order" class="order-mini" data-product="Classic Brownie Box">Order →</a></div></div>
+        </article>
+
+        <article class="signature-card" data-category="brownie">
+          <div class="signature-photo"><img src="images/brownie-box.jpg" alt="Brownie boxes ready for delivery"></div>
+          <div class="signature-body"><span>BROWNIE · GIFTING</span><h3>Brownie Gift Box</h3><p>Freshly packed brownies made for gifting, parties and sweet little surprises.</p><div class="card-bottom"><strong>Price on request</strong><a href="#order" class="order-mini" data-product="Brownie Gift Box">Order →</a></div></div>
+        </article>
+      </div>
+
+      <div class="catalog-note">♡ Prices and availability depend on flavour, size, design and quantity. Enquire on WhatsApp for the current menu.</div>
+    </section>
+
+    <section class="shop section" id="shop">
+      <div class="section-heading">
+        <p class="eyebrow">SHOP THE DESSERT BAR</p>
+        <h2>Choose your <em>sweet treat.</em></h2>
+        <p>Pick a creation, customise it, add it to your basket, and send the whole order to us on WhatsApp.</p>
+      </div>
+      <div class="shop-toolbar">
+        <div class="shop-filters">
+          <button class="shop-filter active" data-shop-filter="all">All</button>
+          <button class="shop-filter" data-shop-filter="cake">Cakes</button>
+          <button class="shop-filter" data-shop-filter="brownie">Brownies</button>
+          <button class="shop-filter" data-shop-filter="cupcake">Cupcakes</button>
+          <button class="shop-filter" data-shop-filter="special">Specials</button>
+        </div>
+        <div class="shop-search"><span>⌕</span><input id="shopSearch" type="search" placeholder="Search cakes, brownies, cupcakes..." aria-label="Search desserts"></div>
+        <button class="cart-button" id="openCart">♡ Basket <span id="cartCount">0</span></button>
+      </div>
+      <div class="shop-grid">
+        <article class="shop-card" data-shop-category="cake" data-product="Ferrero Chocolate Cake" data-image="images/ferrero-cake.jpg"><div class="shop-photo"><img src="images/ferrero-cake.jpg" alt="Ferrero chocolate cake"></div><div class="shop-body"><span>CAKE · CHOCOLATE</span><h3>Ferrero Chocolate Cake</h3><p>Rich chocolate cake with indulgent chocolate and hazelnut-inspired decoration.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Mango Cream Cake" data-image="images/mango-cream-cake.jpg"><div class="shop-photo"><img src="images/mango-cream-cake.jpg" alt="Mango cream cake"></div><div class="shop-body"><span>CAKE · FRUIT</span><h3>Mango Cream Cake</h3><p>Soft cream cake with a bright mango topping and delicate white decoration.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Blue Birthday Cake" data-image="images/blue-birthday-new.jpg"><div class="shop-photo"><img src="images/blue-birthday-new.jpg" alt="Blue birthday cake"></div><div class="shop-body"><span>CAKE · BIRTHDAY</span><h3>Blue Birthday Cake</h3><p>A cheerful celebration cake with piped flowers and room for your message.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Turquoise Celebration Cake" data-image="images/signature-tiered.jpg"><div class="shop-photo"><img src="images/signature-tiered.jpg" alt="Turquoise and white tiered cake"></div><div class="shop-body"><span>CAKE · CUSTOM</span><h3>Turquoise Celebration Cake</h3><p>Two-tier styling with floral details, gold accents and a statement finish.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="brownie" data-product="Loaded Chocolate Brownies" data-image="images/loaded-brownies.jpg"><div class="shop-photo"><img src="images/loaded-brownies.jpg" alt="Loaded chocolate brownies"></div><div class="shop-body"><span>BROWNIE · LOADED</span><h3>Loaded Chocolate Brownies</h3><p>Fudgy brownies finished with chocolate drizzle and crunchy toppings.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="brownie" data-product="KitKat Loaded Brownies" data-image="images/kitkat-brownies.jpg"><div class="shop-photo"><img src="images/kitkat-brownies.jpg" alt="KitKat loaded brownies"></div><div class="shop-body"><span>BROWNIE · CHOCOLATE</span><h3>KitKat Loaded Brownies</h3><p>Fudgy chocolate brownies topped with chocolate bars, drizzle and pearls.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="brownie" data-product="Classic Brownie Box" data-image="images/classic-brownies.jpg"><div class="shop-photo"><img src="images/classic-brownies.jpg" alt="Classic brownie box"></div><div class="shop-body"><span>BROWNIE · BOX</span><h3>Classic Brownie Box</h3><p>A box of rich chocolate brownies for gifting, sharing or keeping all to yourself.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="special" data-product="Tiramisu Cake" data-image="images/tiramisu.jpg"><div class="shop-photo"><img class="zoomable" src="images/tiramisu.jpg" alt="Tiramisu cake"></div><div class="shop-body"><span>SPECIAL · TIRAMISU</span><h3>Tiramisu Cake</h3><p>Coffee, cocoa and creamy layers for a dessert that feels extra special.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Chocolate Overloaded Cake" data-image="images/chocolate-overloaded.jpg"><div class="shop-photo"><img src="images/chocolate-overloaded.jpg" alt="Chocolate overloaded cake"></div><div class="shop-body"><span>CAKE · CHOCOLATE</span><h3>Chocolate Overloaded Cake</h3><p>A dramatic chocolate celebration cake loaded with bars, cookies and chocolate pieces.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Monochrome Chocolate Cake" data-image="images/monochrome-chocolate.jpg"><div class="shop-photo"><img src="images/monochrome-chocolate.jpg" alt="Monochrome chocolate cake"></div><div class="shop-body"><span>CAKE · CHOCOLATE</span><h3>Monochrome Chocolate Cake</h3><p>Rich chocolate styling with matching cupcakes and delicate gold details.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Strawberry Ombre Macaron Cake" data-image="images/strawberry-ombre-macaron.jpg"><div class="shop-photo"><img src="images/strawberry-ombre-macaron.jpg" alt="Strawberry ombre macaron cake"></div><div class="shop-body"><span>CAKE · STRAWBERRY</span><h3>Strawberry Ombre Macaron Cake</h3><p>Soft pink ombre finish with a beautiful macaron arrangement.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Blackcurrant Drip Cake" data-image="images/blackcurrant-drip.jpg"><div class="shop-photo"><img src="images/blackcurrant-drip.jpg" alt="Blackcurrant drip cake"></div><div class="shop-body"><span>CAKE · BLACKCURRANT</span><h3>Blackcurrant Drip Cake</h3><p>A playful pastel cake with drip details, cookies and piped cream.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Blackcurrant Fault Line Cake" data-image="images/blackcurrant-faultline.jpg"><div class="shop-photo"><img src="images/blackcurrant-faultline.jpg" alt="Blackcurrant fault line cake"></div><div class="shop-body"><span>CAKE · BLACKCURRANT</span><h3>Blackcurrant Fault Line Cake</h3><p>Lavender and deep berry tones with a striking fault-line finish.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cake" data-product="Blue Rosette Cake" data-image="images/blue-rosette-new.jpg"><div class="shop-photo"><img src="images/blue-rosette-new.jpg" alt="Blue rosette cake"></div><div class="shop-body"><span>CAKE · ROSETTE</span><h3>Blue Rosette Cake</h3><p>A bold blue cake completely covered in piped rosettes and silver pearls.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cupcake" data-product="Chocolate Fantasy Cupcakes" data-image="images/chocolate-fantasy-cupcakes.jpg"><div class="shop-photo"><img class="zoomable" src="images/chocolate-fantasy-cupcakes.jpg" alt="Chocolate fantasy cupcakes"></div><div class="shop-body"><span>CUPCAKE · CHOCOLATE</span><h3>Chocolate Fantasy Cupcakes</h3><p>Chocolate cupcakes topped with rich swirls and chocolate pieces.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cupcake" data-product="Berry Blast Cupcakes" data-image="images/berry-blast-cupcakes.jpg"><div class="shop-photo"><img class="zoomable" src="images/berry-blast-cupcakes.jpg" alt="Berry blast cupcakes"></div><div class="shop-body"><span>CUPCAKE · BERRY</span><h3>Berry Blast Cupcakes</h3><p>A pretty box of pink and purple berry-inspired cupcakes.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cupcake" data-product="Tiramisu Cupcakes" data-image="images/tiramisu-cupcakes-new.jpg"><div class="shop-photo"><img class="zoomable" src="images/tiramisu-cupcakes-new.jpg" alt="Tiramisu cupcakes"></div><div class="shop-body"><span>CUPCAKE · TIRAMISU</span><h3>Tiramisu Cupcakes</h3><p>Cocoa-toned cupcakes finished with creamy swirls and chocolate accents.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="cupcake" data-product="Devils Chocolate Cupcakes" data-image="images/chocolate-cupcakes-new.jpg"><div class="shop-photo"><img src="images/chocolate-cupcakes-new.jpg" alt="Devil's chocolate cupcakes"></div><div class="shop-body"><span>CUPCAKE · CHOCOLATE</span><h3>Devil's Chocolate Cupcakes</h3><p>Deep chocolate cupcakes with dark frosting, swirls and delicate pearl details.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+        <article class="shop-card" data-shop-category="special" data-product="NYC Cookies" data-image="images/nyc-cookies.jpg"><div class="shop-photo"><img src="images/nyc-cookies.jpg" alt="Freshly baked NYC cookies"></div><div class="shop-body"><span>COOKIE · CHOCOLATE</span><h3>NYC Cookies</h3><p>Freshly baked, chunky cookies packed with chocolate.</p><div class="shop-card-bottom"><strong>Price on request</strong><button class="customize-btn">Customise →</button></div></div></article>
+      </div>
+      <div class="shop-empty" id="shopEmpty">No sweets found. Try another search or category. ♡</div>
+    </section>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close image">×</button>
+      <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">‹</button>
+      <figure><img id="lightboxImage" src="" alt=""><figcaption id="lightboxCaption"></figcaption></figure>
+      <button class="lightbox-next" id="lightboxNext" aria-label="Next image">›</button>
+    </div>
+
+    <div class="product-modal" id="productModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="product-modal-box" role="dialog" aria-modal="true" aria-labelledby="modalProductName">
+        <button class="modal-close" id="closeModal" aria-label="Close">×</button>
+        <div class="modal-image"><img id="modalProductImage" src="" alt=""></div>
+        <div class="modal-content">
+          <span id="modalProductCategory">DESSERT</span><h3 id="modalProductName">Product</h3><p id="modalProductDescription">Choose your options below.</p>
+          <label>Flavour<select id="modalFlavour"><option>Chocolate</option><option>Vanilla</option><option>Red Velvet</option><option>Butterscotch</option><option>Fruit</option><option>I'll discuss on WhatsApp</option></select></label>
+          <label>Size / quantity<select id="modalSize"><option>Small</option><option>Medium</option><option>Large</option><option>I'll discuss on WhatsApp</option></select></label>
+          <label>Quantity<div class="quantity-control"><button type="button" id="qtyMinus">−</button><input id="modalQty" type="number" min="1" max="20" value="1"><button type="button" id="qtyPlus">+</button></div></label>
+          <label>Custom note<textarea id="modalNote" rows="3" placeholder="Theme, colour, message on cake, toppings, etc."></textarea></label>
+          <button class="btn primary full" id="addToCart">Add to basket ♡</button><small>Prices are confirmed by The Dessert Bar after your enquiry.</small>
+        </div>
+      </div>
+    </div>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+      <div class="cart-head"><div><span class="eyebrow">YOUR BASKET</span><h3>Sweet picks</h3></div><button id="closeCart" aria-label="Close basket">×</button></div>
+      <div class="cart-items" id="cartItems"><div class="empty-cart">Your basket is empty.<br><span>Add a sweet treat to get started.</span></div></div>
+      <div class="cart-footer"><div class="cart-summary"><span>Items</span><strong id="cartTotalItems">0</strong></div><button class="btn primary full" id="checkoutCart">Send basket on WhatsApp ↗</button><button class="clear-cart" id="clearCart">Clear basket</button><small>Final pricing and availability will be confirmed on WhatsApp.</small></div>
+    </aside>
+
+    <section class="creations section" id="creations">
+      <div class="section-heading">
+        <p class="eyebrow">FROM OUR KITCHEN</p>
+        <h2>Sweet <em>creations</em></h2>
+        <p>Some of the treats that make The Dessert Bar, The Dessert Bar.</p>
+      </div>
+
+      <div class="gallery">
+        <article class="product large">
+          <img class="zoomable" src="images/floral-cake.jpg" alt="Floral celebration cake">
+          <div class="product-info">
+            <span>01</span>
+            <h3>Floral Celebration Cake</h3>
+            <p>Elegant • Custom • Celebration</p>
+          </div>
+        </article>
+
+        <article class="product">
+          <img class="zoomable" src="images/chocotella-cake.jpg" alt="Chocolate truffle cake with Nutella filling">
+          <div class="product-info">
+            <span>02</span>
+            <h3>Choco-tella Truffle</h3>
+            <p>Chocolate truffle + Nutella</p>
+          </div>
+        </article>
+
+        <article class="product">
+          <img class="zoomable" src="images/berry-cake.jpg" alt="Berry loaded open cake">
+          <div class="product-info">
+            <span>03</span>
+            <h3>Berry Loaded Open Cake</h3>
+            <p>Fresh berries • Creamy • Playful</p>
+          </div>
+        </article>
+
+        <article class="product">
+          <img class="zoomable" src="images/brownies.jpg" alt="Chocolate brownies with chocolate bars">
+          <div class="product-info">
+            <span>04</span>
+            <h3>Loaded Brownies</h3>
+            <p>Rich • Gooey • Chocolatey</p>
+          </div>
+        </article>
+
+        <article class="product">
+          <img class="zoomable" src="images/tiramisu.jpg" alt="Tiramisu cake">
+          <div class="product-info">
+            <span>05</span>
+            <h3>Tiramisu Cake</h3>
+            <p>Coffee • Cocoa • Indulgence</p>
+          </div>
+        </article>
+
+        <article class="product">
+          <img class="zoomable" src="images/cupcake-box.jpg" alt="Assorted cupcake box">
+          <div class="product-info">
+            <span>06</span>
+            <h3>Assorted Cupcake Box</h3>
+            <p>Four little bites of happiness</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="latest section" id="latest">
+      <div class="section-heading">
+        <p class="eyebrow">MORE FROM THE BAR</p>
+        <h2>More sweet <em>moments.</em></h2>
+        <p>A few more creations from The Dessert Bar — including crowd-sized orders and classic favourites.</p>
+      </div>
+      <div class="latest-grid">
+        <figure><img class="zoomable" src="images/chocolate-fantasy-cupcakes.jpg" alt="Chocolate fantasy cupcakes"><figcaption>Chocolate Fantasy Cupcakes</figcaption></figure>
+        <figure><img class="zoomable" src="images/berry-blast-cupcakes.jpg" alt="Berry blast cupcakes"><figcaption>Berry Blast Cupcakes</figcaption></figure>
+        <figure><img class="zoomable" src="images/tiramisu-cupcakes-new.jpg" alt="Tiramisu cupcakes"><figcaption>Tiramisu Cupcakes</figcaption></figure>
+        <figure><img class="zoomable" src="images/nyc-cookies.jpg" alt="NYC cookies"><figcaption>NYC Cookies</figcaption></figure>
+        <figure><img src="images/dessert-table.jpg" alt="Dessert table with assorted treats"><figcaption>Dessert Table</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="feature section">
+      <div class="feature-image">
+        <img src="images/wedding-cake.jpg" alt="Two tier wedding cake">
+      </div>
+      <div class="feature-copy">
+        <p class="eyebrow">FOR THE BIG MOMENTS</p>
+        <h2>From birthdays to<br><em>“I do”.</em></h2>
+        <p>
+          Whether it is a tiny celebration or a once-in-a-lifetime moment,
+          your cake can be as unique as the story behind it.
+        </p>
+        <a href="#order" class="text-link">Tell us your idea →</a>
+      </div>
+    </section>
+
+    <section class="occasions section" id="occasions">
+      <div class="section-heading">
+        <p class="eyebrow">MAKE IT YOURS</p>
+        <h2>For every kind of <em>celebration</em></h2>
+      </div>
+
+      <div class="occasion-grid">
+        <div class="occasion-card"><span>01</span><strong>Birthdays</strong><p>Make the candles worth remembering.</p></div>
+        <div class="occasion-card"><span>02</span><strong>Anniversaries</strong><p>Something sweet for your favourite person.</p></div>
+        <div class="occasion-card"><span>03</span><strong>Weddings</strong><p>Beautiful centrepieces for beautiful beginnings.</p></div>
+        <div class="occasion-card"><span>04</span><strong>Just Because</strong><p>You never really need a reason for cake.</p></div>
+      </div>
+    </section>
+
+    <section class="bulk section" id="bulk">
+      <div class="bulk-visual"><img src="images/bulk-cupcakes.jpg" alt="Large cupcake order prepared for an event"></div>
+      <div class="bulk-copy">
+        <p class="eyebrow">FOR BIGGER MOMENTS</p>
+        <h2>Big orders.<br><em>Bigger smiles.</em></h2>
+        <p>Planning something bigger? The Dessert Bar accepts <strong>bulk party, event and corporate orders</strong> for cupcakes, brownies, cookies, dessert boxes and custom cakes.</p>
+        <div class="bulk-services">
+          <span>✦ Party orders</span><span>✦ Event orders</span><span>✦ Corporate orders</span><span>✦ Custom dessert tables</span>
+        </div>
+        <div class="stall-box">
+          <div><span class="stall-kicker">EVENT COLLABORATIONS</span><h3>Want The Dessert Bar at your event?</h3><p>We are also open to <strong>putting up dessert stalls at events</strong>. Tell us about your event, expected crowd and date, and we'll take it from there.</p></div>
+          <a class="btn primary" href="#order" data-product="Event Dessert Stall">Discuss a stall ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="about-copy">
+        <p class="eyebrow">OUR STORY</p>
+        <h2>A little sweetness,<br><em>a lot of heart.</em></h2>
+        <p>
+          The Dessert Bar is a homegrown baking space where cakes are treated as
+          more than dessert — they are part of the moment. Our creations range
+          from elegant floral designs to rich chocolate favourites and fun
+          custom celebration cakes.
+        </p>
+        <div class="signature">The Dessert Bar <span>♡</span></div>
+      </div>
+
+      <div class="about-stack">
+        <img class="stack-back" src="images/blue-birthday-cake.jpg" alt="Blue birthday cake">
+        <img class="stack-front" src="images/cupcake-box.jpg" alt="Assorted cupcakes">
+      </div>
+    </section>
+
+    <section class="order section" id="order">
+      <div class="order-copy">
+        <p class="eyebrow">LET'S BAKE SOMETHING</p>
+        <h2>Have a sweet idea?<br><em>Let's make it real.</em></h2>
+        <p>
+          Tell us what you are celebrating, what you are craving and when you
+          need it. Your request will open WhatsApp so you can continue the
+          conversation directly.
+        </p>
+        <div class="order-points">
+          <span>♡ Custom designs</span>
+          <span>♡ Celebration cakes</span>
+          <span>♡ Dessert boxes</span>
+          <span>♡ Brownies & cupcakes</span>
+          <span>♡ Bulk & corporate orders</span>
+          <span>♡ Event dessert stalls</span>
+        </div>
+      </div>
+
+      <form id="orderForm">
+        <div class="form-title">
+          <span>QUICK ORDER REQUEST</span>
+          <h3>Let's talk cake.</h3>
+        </div>
+
+        <label>Name<input id="name" type="text" required placeholder="Your name"></label>
+        <label>What are you looking for?
+          <select id="type" required>
+            <option value="">Choose one</option>
+            <option>Custom Cake</option>
+            <option>Wedding Cake</option>
+            <option>Cupcakes</option>
+            <option>Brownies</option>
+            <option>Dessert Box</option>
+            <option>Bulk Party Order</option>
+            <option>Event Order</option>
+            <option>Corporate Order</option>
+            <option>Event Dessert Stall</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <div class="two">
+          <label>Event date<input id="date" type="date"></label>
+          <label>Quantity / size<input id="quantity" type="text" placeholder="e.g. 1 cake"></label>
+        </div>
+        <label>Your idea<textarea id="message" rows="4" placeholder="Flavour, colours, theme, message on cake..."></textarea></label>
+        <button class="btn primary full" type="submit">Place order on WhatsApp ↗</button>
+        <small>No payment is taken on this form. It simply prepares your request.</small>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <img src="images/logo-clean.png" alt="The Dessert Bar logo">
+      <div>
+        <h3>The Dessert Bar</h3>
+        <p>Baked with love. Crafted for your moments.</p>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#menu">Menu</a>
+      <a href="#shop">Shop</a>
+      <a href="#creations">Creations</a>
+      <a href="#occasions">Occasions</a>
+      <a href="#bulk">Bulk & Events</a>
+      <a href="#order">Order</a>
+      <a href="https://www.instagram.com/_.thedessertbar._" target="_blank" rel="noopener">Instagram ↗</a>
+    </div>
+    <p class="copyright">© <span id="year">2026</span> The Dessert Bar · All sweet things reserved.</p>
+  </footer>
+
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/918667607462"
+    target="_blank"
+    rel="noopener"
+    aria-label="Chat with The Dessert Bar on WhatsApp">
+    <span>◉</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
