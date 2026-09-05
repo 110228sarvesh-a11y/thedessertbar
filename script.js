@@ -1,277 +1,882 @@
-function $(selector, root=document){ return root.querySelector(selector); }
-function $$(selector, root=document){ return Array.from(root.querySelectorAll(selector)); }
+/* =========================================
+   THE DESSERT BAR
+   PHONE-FRIENDLY JAVASCRIPT
+========================================= */
 
-// ------------------------------
-// Navigation
-// ------------------------------
-function toggleMenu(){
-  const nav = $('#mainNav');
-  if(nav) nav.classList.toggle('mobile-open');
-}
+const WHATSAPP_NUMBER = "918667607462";
+const CART_KEY = "dessertBarCart";
 
-document.addEventListener('click', function(e){
-  const nav = $('#mainNav');
-  const button = $('.menu-btn');
-  if(nav && nav.classList.contains('mobile-open') && !nav.contains(e.target) && e.target !== button){
-    nav.classList.remove('mobile-open');
+let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+let currentLightboxImages = [];
+let currentLightboxIndex = 0;
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+function toggleMenu() {
+  const nav = document.getElementById("mainNav");
+  const button = document.querySelector(".menu-btn");
+
+  if (!nav) return;
+
+  nav.classList.toggle("open");
+
+  if (button) {
+    const isOpen = nav.classList.contains("open");
+    button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    button.textContent = isOpen ? "×" : "☰";
   }
+}
+
+
+/* Close mobile menu after clicking a link */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const nav = document.getElementById("mainNav");
+
+  if (nav) {
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+
+        nav.classList.remove("open");
+
+        const button = document.querySelector(".menu-btn");
+
+        if (button) {
+          button.setAttribute("aria-expanded", "false");
+          button.textContent = "☰";
+        }
+
+      });
+    });
+  }
+
 });
-$$('#mainNav a').forEach(link => link.addEventListener('click', () => $('#mainNav')?.classList.remove('mobile-open')));
 
-// ------------------------------
-// Helpers
-// ------------------------------
-function localToday(){
-  const d = new Date();
-  const m = String(d.getMonth()+1).padStart(2,'0');
-  const day = String(d.getDate()).padStart(2,'0');
-  return `${d.getFullYear()}-${m}-${day}`;
-}
-function escapeHtml(text){
-  const d = document.createElement('div');
-  d.textContent = text == null ? '' : String(text);
-  return d.innerHTML;
-}
-function openWhatsApp(text){
-  window.open('https://wa.me/918667607462?text=' + encodeURIComponent(text), '_blank', 'noopener');
+
+/* =========================================
+   WHATSAPP
+========================================= */
+
+function openWhatsApp(message) {
+
+  const url =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
+
 }
 
-// ------------------------------
-// Order form
-// ------------------------------
-const form = $('#orderForm');
-const dateInput = $('#date');
-if(dateInput) dateInput.min = localToday();
-if($('#year')) $('#year').textContent = new Date().getFullYear();
 
-if(form){
-  form.addEventListener('submit', function(event){
-    event.preventDefault();
-    const name = $('#name')?.value.trim() || 'Not specified';
-    const type = $('#type')?.value || 'Not specified';
-    const date = $('#date')?.value || 'Not specified';
-    const quantity = $('#quantity')?.value.trim() || 'Not specified';
-    const message = $('#message')?.value.trim() || 'Not specified';
-    const text = `Hi The Dessert Bar! 🍰\n\nI'd like to place an order enquiry.\n\nName: ${name}\nLooking for: ${type}\nEvent date: ${date}\nQuantity / size: ${quantity}\nMy idea: ${message}\n\nPlease let me know the available options and details.\n\nThank you! ♡`;
-    openWhatsApp(text);
-  });
-}
+/* =========================================
+   ORDER FORM PREFILL
+========================================= */
 
-// Pre-fill enquiry form from product links
-$$('[data-product]').forEach(button => {
-  button.addEventListener('click', function(){
-    const product = button.dataset.product;
-    const type = $('#type');
-    const message = $('#message');
-    if(type){
-      const option = Array.from(type.options).find(o => o.textContent.trim().toLowerCase() === product.trim().toLowerCase());
-      type.value = option ? option.value : (product.toLowerCase().includes('stall') ? 'Event Dessert Stall' : 'Custom Cake');
+function prefillOrder(product) {
+
+  const type = document.getElementById("type");
+
+  if (!type) return;
+
+  const options = Array.from(type.options);
+
+  const matchingOption = options.find(
+    option => option.text.toLowerCase() === product.toLowerCase()
+  );
+
+  if (matchingOption) {
+    type.value = matchingOption.value;
+  }
+
+  const message = document.getElementById("message");
+
+  if (message) {
+
+    if (
+      message.value.trim() === "" ||
+      message.value.toLowerCase().includes(product.toLowerCase())
+    ) {
+      message.value = `I'm interested in ${product}.`;
     }
-    if(message && !message.value.trim()) message.value = 'I am interested in: ' + product;
-  });
-});
 
-// ------------------------------
-// Signature menu filter
-// ------------------------------
-const signatureFilters = $$('.filter');
-const signatureCards = $$('.signature-card');
-signatureFilters.forEach(filter => filter.addEventListener('click', () => {
-  signatureFilters.forEach(btn => btn.classList.remove('active'));
-  filter.classList.add('active');
-  const selected = filter.dataset.filter;
-  signatureCards.forEach(card => {
-    card.style.display = selected === 'all' || card.dataset.category === selected ? '' : 'none';
-  });
-}));
+  }
 
-// ------------------------------
-// Shop filtering + search
-// ------------------------------
-const shopCards = $$('.shop-card');
-const shopFilters = $$('.shop-filter');
-const shopSearch = $('#shopSearch');
-const shopEmpty = $('#shopEmpty');
-function applyShopFilters(){
-  const active = $('.shop-filter.active')?.dataset.shopFilter || 'all';
-  const q = (shopSearch?.value || '').trim().toLowerCase();
-  let visible = 0;
-  shopCards.forEach(card => {
-    const categoryMatch = active === 'all' || card.dataset.shopCategory === active;
-    const textMatch = !q || card.textContent.toLowerCase().includes(q);
-    const show = categoryMatch && textMatch;
-    card.classList.toggle('is-hidden', !show);
-    if(show) visible++;
-  });
-  shopEmpty?.classList.toggle('show', visible === 0);
 }
-shopFilters.forEach(filter => filter.addEventListener('click', () => {
-  shopFilters.forEach(btn => btn.classList.remove('active'));
-  filter.classList.add('active');
-  applyShopFilters();
-}));
-shopSearch?.addEventListener('input', applyShopFilters);
 
-// ------------------------------
-// Product modal + basket
-// ------------------------------
-let cart = [];
-try{ cart = JSON.parse(localStorage.getItem('dessertBarCart') || '[]'); }catch(e){ cart = []; }
-let selectedProduct = null;
-const modal = $('#productModal');
-const cartDrawer = $('#cartDrawer');
 
-function saveCart(){ localStorage.setItem('dessertBarCart', JSON.stringify(cart)); }
-function openProductModal(card){
-  selectedProduct = {
-    name: card.dataset.product,
-    image: card.dataset.image,
-    category: $('.shop-body span', card)?.textContent || 'DESSERT',
-    description: $('.shop-body p', card)?.textContent || ''
-  };
-  $('#modalProductImage').src = selectedProduct.image;
-  $('#modalProductImage').alt = selectedProduct.name;
-  $('#modalProductName').textContent = selectedProduct.name;
-  $('#modalProductCategory').textContent = selectedProduct.category;
-  $('#modalProductDescription').textContent = selectedProduct.description;
-  $('#modalFlavour').value = 'Chocolate';
-  $('#modalSize').value = 'Small';
-  $('#modalQty').value = 1;
-  $('#modalNote').value = '';
-  modal?.classList.add('open');
-  modal?.setAttribute('aria-hidden','false');
-  document.body.classList.add('modal-lock');
+/* =========================================
+   ORDER BUTTONS
+========================================= */
+
+document.addEventListener("click", event => {
+
+  const button = event.target.closest(
+    "[data-product]"
+  );
+
+  if (!button) return;
+
+  const product = button.dataset.product;
+
+  if (!product) return;
+
+  prefillOrder(product);
+
+});
+
+
+/* =========================================
+   PRODUCT FILTERS
+========================================= */
+
+function setupFilters() {
+
+  const filters =
+    document.querySelectorAll(".filter");
+
+  const cards =
+    document.querySelectorAll(".signature-card");
+
+  if (!filters.length || !cards.length) return;
+
+  filters.forEach(filter => {
+
+    filter.addEventListener("click", () => {
+
+      const selected =
+        filter.dataset.filter || "all";
+
+      filters.forEach(item => {
+        item.classList.remove("active");
+      });
+
+      filter.classList.add("active");
+
+      cards.forEach(card => {
+
+        const category =
+          card.dataset.category;
+
+        if (
+          selected === "all" ||
+          category === selected
+        ) {
+
+          card.style.display = "";
+
+        } else {
+
+          card.style.display = "none";
+
+        }
+
+      });
+
+    });
+
+  });
+
 }
-function closeProductModal(){
-  modal?.classList.remove('open');
-  modal?.setAttribute('aria-hidden','true');
-  document.body.classList.remove('modal-lock');
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+function setupSearch() {
+
+  const search =
+    document.getElementById("productSearch");
+
+  const cards =
+    document.querySelectorAll(".signature-card");
+
+  if (!search || !cards.length) return;
+
+  search.addEventListener("input", () => {
+
+    const query =
+      search.value.trim().toLowerCase();
+
+    cards.forEach(card => {
+
+      const text =
+        card.textContent.toLowerCase();
+
+      card.style.display =
+        text.includes(query) ? "" : "none";
+
+    });
+
+  });
+
 }
-$$('.customize-btn').forEach(btn => btn.addEventListener('click', () => openProductModal(btn.closest('.shop-card'))));
-$('#closeModal')?.addEventListener('click', closeProductModal);
-$('[data-close-modal]')?.addEventListener('click', closeProductModal);
 
-$('#qtyMinus')?.addEventListener('click', () => {
-  const input = $('#modalQty'); input.value = Math.max(1, Number(input.value || 1) - 1);
-});
-$('#qtyPlus')?.addEventListener('click', () => {
-  const input = $('#modalQty'); input.value = Math.min(20, Number(input.value || 1) + 1);
-});
-$('#modalQty')?.addEventListener('change', () => {
-  const input = $('#modalQty'); input.value = Math.max(1, Math.min(20, Number(input.value || 1)));
-});
 
-$('#addToCart')?.addEventListener('click', () => {
-  if(!selectedProduct) return;
-  const item = {
-    ...selectedProduct,
-    flavour: $('#modalFlavour').value,
-    size: $('#modalSize').value,
-    qty: Math.max(1, Math.min(20, Number($('#modalQty').value) || 1)),
-    note: $('#modalNote').value.trim()
-  };
-  // Merge identical selections instead of creating duplicate basket lines.
-  const existing = cart.find(x => x.name===item.name && x.flavour===item.flavour && x.size===item.size && x.note===item.note);
-  if(existing) existing.qty = Math.min(20, existing.qty + item.qty);
-  else cart.push(item);
-  saveCart(); renderCart(); closeProductModal(); openCartDrawer();
-});
+/* =========================================
+   CART
+========================================= */
 
-function renderCart(){
-  const box = $('#cartItems');
-  if(!box) return;
-  const count = cart.reduce((sum,item) => sum + Number(item.qty || 0), 0);
-  if($('#cartCount')) $('#cartCount').textContent = count;
-  if($('#cartTotalItems')) $('#cartTotalItems').textContent = count;
-  if(!cart.length){
-    box.innerHTML = '<div class="empty-cart">Your basket is empty.<br><span>Add a sweet treat to get started.</span></div>';
+function saveCart() {
+
+  localStorage.setItem(
+    CART_KEY,
+    JSON.stringify(cart)
+  );
+
+}
+
+
+function addToCart(product, flavour, size, quantity, note) {
+
+  const existing =
+    cart.find(item =>
+      item.product === product &&
+      item.flavour === flavour &&
+      item.size === size &&
+      item.note === note
+    );
+
+  if (existing) {
+
+    existing.quantity += quantity;
+
+  } else {
+
+    cart.push({
+      product,
+      flavour,
+      size,
+      quantity,
+      note
+    });
+
+  }
+
+  saveCart();
+  renderCart();
+
+}
+
+
+function removeFromCart(index) {
+
+  cart.splice(index, 1);
+
+  saveCart();
+  renderCart();
+
+}
+
+
+function changeCartQuantity(index, amount) {
+
+  if (!cart[index]) return;
+
+  cart[index].quantity += amount;
+
+  if (cart[index].quantity <= 0) {
+    cart.splice(index, 1);
+  }
+
+  saveCart();
+  renderCart();
+
+}
+
+
+function clearCart() {
+
+  cart = [];
+
+  saveCart();
+  renderCart();
+
+}
+
+
+function renderCart() {
+
+  const container =
+    document.getElementById("cartItems");
+
+  if (!container) return;
+
+  if (!cart.length) {
+
+    container.innerHTML = `
+      <p class="empty-cart">
+        Your basket is empty.
+      </p>
+    `;
+
     return;
   }
-  box.innerHTML = cart.map((item,index) => `
-    <div class="cart-item">
-      <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">
-      <div>
-        <h4>${escapeHtml(item.name)}</h4>
-        <p>Flavour: ${escapeHtml(item.flavour)}<br>Size: ${escapeHtml(item.size)}${item.note ? '<br>Note: '+escapeHtml(item.note) : ''}</p>
-        <button class="remove-item" data-remove="${index}">Remove</button>
-        <div class="cart-qty"><button type="button" data-cart-minus="${index}">−</button><span>${Number(item.qty || 1)}</span><button type="button" data-cart-plus="${index}">+</button></div>
+
+
+  container.innerHTML = cart.map((item, index) => {
+
+    return `
+      <div class="cart-item">
+
+        <div class="cart-item-info">
+
+          <strong>
+            ${escapeHTML(item.product)}
+          </strong>
+
+          ${
+            item.flavour
+              ? `<small>Flavour: ${escapeHTML(item.flavour)}</small>`
+              : ""
+          }
+
+          ${
+            item.size
+              ? `<small>Size: ${escapeHTML(item.size)}</small>`
+              : ""
+          }
+
+          ${
+            item.note
+              ? `<small>${escapeHTML(item.note)}</small>`
+              : ""
+          }
+
+        </div>
+
+        <div class="cart-controls">
+
+          <button
+            type="button"
+            onclick="changeCartQuantity(${index}, -1)">
+            −
+          </button>
+
+          <span>
+            ${item.quantity}
+          </span>
+
+          <button
+            type="button"
+            onclick="changeCartQuantity(${index}, 1)">
+            +
+          </button>
+
+        </div>
+
+        <button
+          type="button"
+          class="remove-cart"
+          onclick="removeFromCart(${index})">
+          ×
+        </button>
+
       </div>
-    </div>`).join('');
-  $$('[data-remove]',box).forEach(btn => btn.addEventListener('click', () => { cart.splice(Number(btn.dataset.remove),1); saveCart(); renderCart(); }));
-  $$('[data-cart-minus]',box).forEach(btn => btn.addEventListener('click', () => changeCartQuantity(Number(btn.dataset.cartMinus),-1)));
-  $$('[data-cart-plus]',box).forEach(btn => btn.addEventListener('click', () => changeCartQuantity(Number(btn.dataset.cartPlus),1)));
-}
-function changeCartQuantity(index, delta){
-  if(!cart[index]) return;
-  cart[index].qty = Math.max(0, Math.min(20, Number(cart[index].qty || 1) + delta));
-  if(cart[index].qty === 0) cart.splice(index,1);
-  saveCart(); renderCart();
-}
-function openCartDrawer(){
-  cartDrawer?.classList.add('open');
-  cartDrawer?.setAttribute('aria-hidden','false');
-  $('.cart-overlay')?.classList.add('show');
-}
-function closeCartDrawer(){
-  cartDrawer?.classList.remove('open');
-  cartDrawer?.setAttribute('aria-hidden','true');
-  $('.cart-overlay')?.classList.remove('show');
-}
-$('#openCart')?.addEventListener('click', openCartDrawer);
-$('#closeCart')?.addEventListener('click', closeCartDrawer);
-$('#clearCart')?.addEventListener('click', () => { cart=[]; saveCart(); renderCart(); });
-$('#checkoutCart')?.addEventListener('click', () => {
-  if(!cart.length){ alert('Your basket is empty. Add a dessert first!'); return; }
-  const lines = cart.map((item,i) => `${i+1}. ${item.name} — ${item.flavour}, ${item.size}, Qty ${item.qty}${item.note ? ' — '+item.note : ''}`).join('\n');
-  openWhatsApp(`Hi The Dessert Bar! 🍰\n\nI'd like to enquire about these items from my basket:\n\n${lines}\n\nPlease let me know the prices, availability and delivery/pickup details.\n\nThank you! ♡`);
-});
+    `;
 
-// Add an overlay for the basket if the markup doesn't already contain one.
-if(!$('.cart-overlay')){
-  const overlay = document.createElement('div');
-  overlay.className='cart-overlay';
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click',closeCartDrawer);
+  }).join("");
+
 }
 
-// ------------------------------
-// Gallery lightbox
-// ------------------------------
-const lightbox = $('#lightbox');
-const lightboxImage = $('#lightboxImage');
-const lightboxCaption = $('#lightboxCaption');
-const zoomImages = $$('.zoomable');
-let lightboxIndex = 0;
-function openLightbox(index){
-  if(!zoomImages.length) return;
-  lightboxIndex = (index + zoomImages.length) % zoomImages.length;
-  const img = zoomImages[lightboxIndex];
-  lightboxImage.src = img.src;
-  lightboxImage.alt = img.alt;
-  lightboxCaption.textContent = img.alt;
-  lightbox.classList.add('open');
-  lightbox.setAttribute('aria-hidden','false');
-  document.body.classList.add('modal-lock');
-}
-function closeLightbox(){
-  lightbox?.classList.remove('open');
-  lightbox?.setAttribute('aria-hidden','true');
-  document.body.classList.remove('modal-lock');
-}
-function moveLightbox(delta){ openLightbox(lightboxIndex + delta); }
-zoomImages.forEach((img,index) => img.addEventListener('click',() => openLightbox(index)));
-$('#lightboxClose')?.addEventListener('click',closeLightbox);
-$('#lightboxPrev')?.addEventListener('click',() => moveLightbox(-1));
-$('#lightboxNext')?.addEventListener('click',() => moveLightbox(1));
-lightbox?.addEventListener('click',e => { if(e.target === lightbox) closeLightbox(); });
 
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape'){ closeProductModal(); closeCartDrawer(); closeLightbox(); }
-  if(lightbox?.classList.contains('open')){
-    if(e.key === 'ArrowLeft') moveLightbox(-1);
-    if(e.key === 'ArrowRight') moveLightbox(1);
+/* =========================================
+   CART PANEL
+========================================= */
+
+function openCart() {
+
+  const panel =
+    document.getElementById("cartPanel");
+
+  if (panel) {
+    panel.classList.add("open");
   }
+
+}
+
+
+function closeCart() {
+
+  const panel =
+    document.getElementById("cartPanel");
+
+  if (panel) {
+    panel.classList.remove("open");
+  }
+
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const closeButton =
+    document.getElementById("closeCart");
+
+  if (closeButton) {
+    closeButton.addEventListener(
+      "click",
+      closeCart
+    );
+  }
+
+
+  const clearButton =
+    document.getElementById("clearCart");
+
+  if (clearButton) {
+    clearButton.addEventListener(
+      "click",
+      clearCart
+    );
+  }
+
+
+  const checkoutButton =
+    document.getElementById("checkoutCart");
+
+  if (checkoutButton) {
+
+    checkoutButton.addEventListener(
+      "click",
+      () => {
+
+        if (!cart.length) {
+
+          alert("Your basket is empty.");
+
+          return;
+
+        }
+
+        let message =
+          "Hi The Dessert Bar! I'd like to enquire about these items:%0A";
+
+        message = "";
+
+        cart.forEach((item, index) => {
+
+          message +=
+            `${index + 1}. ${item.product}`;
+
+          if (item.flavour) {
+            message +=
+              ` | Flavour: ${item.flavour}`;
+          }
+
+          if (item.size) {
+            message +=
+              ` | Size: ${item.size}`;
+          }
+
+          message +=
+            ` | Qty: ${item.quantity}`;
+
+          if (item.note) {
+            message +=
+              ` | Note: ${item.note}`;
+          }
+
+          message += "\n";
+
+        });
+
+        message +=
+          "\nPlease let me know the price and availability.";
+
+        openWhatsApp(message);
+
+      }
+    );
+
+  }
+
 });
 
-renderCart();
-applyShopFilters();
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================
+   ORDER FORM
+========================================= */
+
+function setupOrderForm() {
+
+  const form =
+    document.getElementById("orderForm");
+
+  if (!form) return;
+
+  form.addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    const name =
+      document.getElementById("name")?.value.trim() || "";
+
+    const type =
+      document.getElementById("type")?.value || "";
+
+    const date =
+      document.getElementById("date")?.value || "";
+
+    const quantity =
+      document.getElementById("quantity")?.value.trim() || "";
+
+    const message =
+      document.getElementById("message")?.value.trim() || "";
+
+
+    let whatsappMessage =
+      `Hi The Dessert Bar! I'd like to place an enquiry.\n\n`;
+
+    whatsappMessage +=
+      `Name: ${name}\n`;
+
+    whatsappMessage +=
+      `Looking for: ${type}\n`;
+
+    if (date) {
+      whatsappMessage +=
+        `Event date: ${date}\n`;
+    }
+
+    if (quantity) {
+      whatsappMessage +=
+        `Quantity / size: ${quantity}\n`;
+    }
+
+    if (message) {
+      whatsappMessage +=
+        `Details: ${message}\n`;
+    }
+
+    whatsappMessage +=
+      `\nPlease let me know the price and availability.`;
+
+    openWhatsApp(whatsappMessage);
+
+  });
+
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+function setupDate() {
+
+  const dateInput =
+    document.getElementById("date");
+
+  if (!dateInput) return;
+
+  const today =
+    new Date();
+
+  const year =
+    today.getFullYear();
+
+  const month =
+    String(today.getMonth() + 1)
+      .padStart(2, "0");
+
+  const day =
+    String(today.getDate())
+      .padStart(2, "0");
+
+  dateInput.min =
+    `${year}-${month}-${day}`;
+
+}
+
+
+/* =========================================
+   IMAGE LIGHTBOX
+========================================= */
+
+function createLightbox() {
+
+  if (document.querySelector(".lightbox")) {
+    return;
+  }
+
+  const lightbox =
+    document.createElement("div");
+
+  lightbox.className = "lightbox";
+
+  lightbox.innerHTML = `
+
+    <button
+      class="lightbox-close"
+      aria-label="Close image">
+      ×
+    </button>
+
+    <button
+      class="lightbox-prev"
+      aria-label="Previous image">
+      ‹
+    </button>
+
+    <img
+      class="lightbox-image"
+      src=""
+      alt="">
+
+    <button
+      class="lightbox-next"
+      aria-label="Next image">
+      ›
+    </button>
+
+  `;
+
+  document.body.appendChild(lightbox);
+
+  lightbox
+    .querySelector(".lightbox-close")
+    .addEventListener(
+      "click",
+      closeLightbox
+    );
+
+  lightbox
+    .querySelector(".lightbox-prev")
+    .addEventListener(
+      "click",
+      showPreviousImage
+    );
+
+  lightbox
+    .querySelector(".lightbox-next")
+    .addEventListener(
+      "click",
+      showNextImage
+    );
+
+  lightbox.addEventListener(
+    "click",
+    event => {
+
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+
+    }
+  );
+
+}
+
+
+function setupLightbox() {
+
+  const images =
+    document.querySelectorAll(
+      ".zoomable"
+    );
+
+  if (!images.length) return;
+
+  currentLightboxImages =
+    Array.from(images);
+
+  images.forEach((image, index) => {
+
+    image.addEventListener(
+      "click",
+      () => {
+
+        currentLightboxImages =
+          Array.from(
+            document.querySelectorAll(
+              ".zoomable"
+            )
+          );
+
+        currentLightboxIndex =
+          currentLightboxImages.indexOf(
+            image
+          );
+
+        openLightbox();
+
+      }
+    );
+
+  });
+
+}
+
+
+function openLightbox() {
+
+  createLightbox();
+
+  const lightbox =
+    document.querySelector(".lightbox");
+
+  const image =
+    lightbox.querySelector(
+      ".lightbox-image"
+    );
+
+  const source =
+    currentLightboxImages[
+      currentLightboxIndex
+    ];
+
+  if (!source) return;
+
+  image.src = source.src;
+  image.alt = source.alt || "Dessert";
+
+  lightbox.style.display = "flex";
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeLightbox() {
+
+  const lightbox =
+    document.querySelector(".lightbox");
+
+  if (lightbox) {
+    lightbox.style.display = "none";
+  }
+
+  document.body.style.overflow = "";
+
+}
+
+
+function showPreviousImage() {
+
+  if (!currentLightboxImages.length) return;
+
+  currentLightboxIndex--;
+
+  if (currentLightboxIndex < 0) {
+    currentLightboxIndex =
+      currentLightboxImages.length - 1;
+  }
+
+  openLightbox();
+
+}
+
+
+function showNextImage() {
+
+  if (!currentLightboxImages.length) return;
+
+  currentLightboxIndex++;
+
+  if (
+    currentLightboxIndex >=
+    currentLightboxImages.length
+  ) {
+    currentLightboxIndex = 0;
+  }
+
+  openLightbox();
+
+}
+
+
+/* =========================================
+   KEYBOARD LIGHTBOX
+========================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    const lightbox =
+      document.querySelector(".lightbox");
+
+    if (
+      !lightbox ||
+      lightbox.style.display === "none"
+    ) {
+      return;
+    }
+
+    if (event.key === "Escape") {
+      closeLightbox();
+    }
+
+    if (event.key === "ArrowLeft") {
+      showPreviousImage();
+    }
+
+    if (event.key === "ArrowRight") {
+      showNextImage();
+    }
+
+  }
+);
+
+
+/* =========================================
+   YEAR
+========================================= */
+
+function setupYear() {
+
+  const year =
+    document.getElementById("year");
+
+  if (year) {
+    year.textContent =
+      new Date().getFullYear();
+  }
+
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    setupFilters();
+
+    setupSearch();
+
+    setupOrderForm();
+
+    setupDate();
+
+    setupLightbox();
+
+    setupYear();
+
+    renderCart();
+
+  }
+);
