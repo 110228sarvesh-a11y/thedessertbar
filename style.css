@@ -1513,8 +1513,18 @@ footer {
     border-bottom: 0;
   }
 
+  /* INSTAGRAM - VISIBLE ON PHONE */
+
   .instagram-btn {
-    display: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    padding: 8px 10px;
+
+    font-size: 10px;
+    white-space: nowrap;
   }
 
 
@@ -1901,6 +1911,13 @@ footer {
 
   .menu-btn {
     font-size: 25px;
+  }
+
+  /* SMALL PHONE INSTAGRAM BUTTON */
+
+  .instagram-btn {
+    padding: 7px 8px;
+    font-size: 9px;
   }
 
   .hero {
