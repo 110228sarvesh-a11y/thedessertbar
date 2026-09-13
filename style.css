@@ -368,7 +368,7 @@ em {
 .arch img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .floating-tag {
@@ -477,7 +477,7 @@ em {
 .menu-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .menu-card-body {
@@ -642,7 +642,7 @@ em {
 .signature-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 
   cursor: zoom-in;
 
@@ -810,7 +810,7 @@ em {
   width: 100%;
   height: 100%;
 
-  object-fit: cover;
+  object-fit: contain;
 
   transition: transform 0.6s ease;
 }
@@ -872,7 +872,7 @@ em {
 
 .latest-grid img {
   aspect-ratio: 1;
-  object-fit: cover;
+  object-fit: contain;
 
   cursor: zoom-in;
 
@@ -913,7 +913,7 @@ em {
 
 .feature-image img {
   aspect-ratio: 0.9;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .feature-copy p:not(.eyebrow) {
@@ -1003,7 +1003,7 @@ em {
 
 .bulk-visual img {
   aspect-ratio: 0.9;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .bulk-copy > p:not(.eyebrow) {
@@ -1105,7 +1105,7 @@ em {
   width: 65%;
   height: 390px;
 
-  object-fit: cover;
+  object-fit: contain;
 
   border-radius: 25px;
 
@@ -1513,18 +1513,8 @@ footer {
     border-bottom: 0;
   }
 
-  /* INSTAGRAM - VISIBLE ON PHONE */
-
   .instagram-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-
-    padding: 8px 10px;
-
-    font-size: 10px;
-    white-space: nowrap;
+    display: none;
   }
 
 
@@ -1913,13 +1903,6 @@ footer {
     font-size: 25px;
   }
 
-  /* SMALL PHONE INSTAGRAM BUTTON */
-
-  .instagram-btn {
-    padding: 7px 8px;
-    font-size: 9px;
-  }
-
   .hero {
     padding-top: 40px;
   }
@@ -1970,4 +1953,41 @@ footer {
     transition-duration: 0.01ms !important;
   }
 
+}
+
+/* FULL IMAGE VISIBILITY FIX */
+.signature-photo {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Keep Instagram visible on phones */
+@media (max-width: 1050px) {
+  .instagram-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 8px 10px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 390px) {
+  .instagram-btn {
+    padding: 7px 8px;
+    font-size: 9px;
+  }
 }
