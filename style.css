@@ -1,6 +1,6 @@
 /* =========================================
    THE DESSERT BAR
-   PHONE-FRIENDLY STYLES
+   CLEAN RESPONSIVE STYLES
 ========================================= */
 
 :root {
@@ -15,6 +15,10 @@
   --shadow: 0 18px 50px rgba(75, 59, 64, 0.10);
   --radius: 24px;
 }
+
+/* =========================================
+   RESET
+========================================= */
 
 * {
   box-sizing: border-box;
@@ -107,7 +111,6 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-
   flex-shrink: 0;
 }
 
@@ -129,7 +132,6 @@ button {
   align-items: center;
   justify-content: center;
   gap: 18px;
-
   margin-left: auto;
 }
 
@@ -137,7 +139,6 @@ button {
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
-
   transition: 0.25s ease;
 }
 
@@ -146,6 +147,11 @@ button {
 }
 
 .instagram-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
   padding: 10px 15px;
 
   border: 1px solid var(--line);
@@ -324,7 +330,6 @@ em {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-
   margin-top: 30px;
 }
 
@@ -400,7 +405,6 @@ em {
 
 .doodle {
   position: absolute;
-
   color: #a17aa6;
   font-size: 30px;
 }
@@ -435,7 +439,6 @@ em {
 
 .intro > p {
   align-self: end;
-
   color: var(--muted);
   font-size: 16px;
 }
@@ -469,6 +472,7 @@ em {
 }
 
 .menu-photo {
+  width: 100%;
   height: 260px;
   overflow: hidden;
   background: var(--lavender);
@@ -546,7 +550,6 @@ em {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
-
   margin-bottom: 30px;
 }
 
@@ -608,15 +611,25 @@ em {
 
 /* =========================================
    SIGNATURE PRODUCTS
+   FIXED CARD LAYOUT
 ========================================= */
 
 .signature-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
   gap: 25px;
+
+  /* IMPORTANT:
+     prevents cards from stretching to
+     match the tallest card in a row */
+  align-items: start;
 }
 
 .signature-card {
+  width: 100%;
+
   overflow: hidden;
 
   background: white;
@@ -626,7 +639,11 @@ em {
 
   box-shadow: 0 12px 35px rgba(75, 59, 64, 0.05);
 
-  transition: 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  align-self: start;
 }
 
 .signature-card:hover {
@@ -634,15 +651,25 @@ em {
   box-shadow: var(--shadow);
 }
 
+/* Fixed image container */
 .signature-photo {
+  width: 100%;
   height: 300px;
+
   overflow: hidden;
+
+  display: block;
+
   background: var(--lavender);
 }
 
+/* Actual dessert image */
 .signature-photo img {
+  display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
   object-position: center;
 
@@ -655,11 +682,19 @@ em {
   transform: scale(1.04);
 }
 
+/* Card text */
 .signature-body {
+  width: 100%;
+
   padding: 23px;
+
+  height: auto;
+  min-height: 0;
 }
 
 .signature-body > span {
+  display: block;
+
   color: #97739d;
 
   font-size: 9px;
@@ -669,7 +704,6 @@ em {
 
 .signature-body h3 {
   margin: 10px 0;
-
   font-size: 27px;
 }
 
@@ -744,7 +778,6 @@ em {
 .cart-head button {
   border: 0;
   background: transparent;
-
   font-size: 30px;
 }
 
@@ -775,6 +808,7 @@ em {
   display: block;
 
   color: var(--muted);
+
   font-size: 11px;
   text-align: center;
 }
@@ -787,7 +821,7 @@ em {
 .gallery {
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 25px;
 }
@@ -860,7 +894,7 @@ em {
 .latest-grid {
   display: grid;
 
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 
   gap: 15px;
 }
@@ -874,7 +908,9 @@ em {
 }
 
 .latest-grid img {
-  aspect-ratio: 1;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
   object-fit: cover;
   object-position: center;
 
@@ -916,7 +952,9 @@ em {
 }
 
 .feature-image img {
+  width: 100%;
   aspect-ratio: 0.9;
+
   object-fit: cover;
   object-position: center;
 }
@@ -942,7 +980,7 @@ em {
 .occasion-grid {
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
   gap: 18px;
 }
@@ -980,7 +1018,7 @@ em {
 
 
 /* =========================================
-   BULK
+   BULK & EVENTS
 ========================================= */
 
 .bulk {
@@ -1007,7 +1045,10 @@ em {
 }
 
 .bulk-visual img {
+  width: 100%;
+
   aspect-ratio: 0.9;
+
   object-fit: cover;
   object-position: center;
 }
@@ -1029,7 +1070,7 @@ em {
 .bulk-services span {
   padding: 9px 13px;
 
-  background: rgba(255,255,255,0.65);
+  background: rgba(255, 255, 255, 0.65);
 
   border-radius: 50px;
 
@@ -1045,7 +1086,7 @@ em {
   margin-top: 30px;
   padding: 22px;
 
-  background: rgba(255,255,255,0.72);
+  background: rgba(255, 255, 255, 0.72);
 
   border-radius: 22px;
 }
@@ -1152,7 +1193,9 @@ em {
 
 .order-points {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 12px;
 
   margin-top: 25px;
@@ -1228,6 +1271,7 @@ em {
 
 .two {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 
   gap: 14px;
@@ -1241,6 +1285,7 @@ em {
   color: var(--muted);
 
   font-size: 10px;
+
   text-align: center;
 }
 
@@ -1266,6 +1311,7 @@ footer {
 .footer-brand img {
   width: 60px;
   height: 60px;
+
   object-fit: contain;
 }
 
@@ -1275,7 +1321,7 @@ footer {
 }
 
 .footer-brand p {
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.65);
   font-size: 12px;
 }
 
@@ -1289,7 +1335,7 @@ footer {
 
 .footer-links a {
   font-size: 12px;
-  color: rgba(255,255,255,0.78);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .footer-links a:hover {
@@ -1299,9 +1345,9 @@ footer {
 .copyright {
   padding-top: 25px;
 
-  border-top: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 
-  color: rgba(255,255,255,0.45);
+  color: rgba(255, 255, 255, 0.45);
 
   font-size: 10px;
 }
@@ -1333,7 +1379,7 @@ footer {
 
   font-size: 23px;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 
   transition: 0.25s ease;
 }
@@ -1368,6 +1414,7 @@ footer {
   max-height: 88vh;
 
   width: auto;
+
   object-fit: contain;
 
   border-radius: 15px;
@@ -1407,8 +1454,13 @@ footer {
     font-size: 11px;
   }
 
+  /* Instagram stays visible */
   .instagram-btn {
-    display: none;
+    display: inline-flex;
+
+    padding: 8px 10px;
+
+    font-size: 10px;
   }
 
   .hero {
@@ -1417,20 +1469,25 @@ footer {
 
   .menu-grid,
   .signature-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
   }
 
   .latest-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .occasion-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .bulk {
     padding: 45px;
     gap: 40px;
+  }
+
+  .signature-photo {
+    height: 280px;
   }
 }
 
@@ -1450,7 +1507,10 @@ footer {
     padding: 7px 10px;
   }
 
-  /* HEADER */
+
+  /* -----------------------------------------
+     HEADER
+  ----------------------------------------- */
 
   .site-header {
     min-height: 68px;
@@ -1459,11 +1519,12 @@ footer {
 
     justify-content: space-between;
 
-    gap: 10px;
+    gap: 8px;
   }
 
   .brand {
     gap: 8px;
+    min-width: 0;
   }
 
   .brand img {
@@ -1477,6 +1538,8 @@ footer {
 
   .menu-btn {
     display: block;
+
+    flex-shrink: 0;
   }
 
   .site-header nav {
@@ -1501,7 +1564,7 @@ footer {
 
     border-bottom: 1px solid var(--line);
 
-    box-shadow: 0 15px 30px rgba(75,59,64,0.08);
+    box-shadow: 0 15px 30px rgba(75, 59, 64, 0.08);
   }
 
   .site-header nav.open {
@@ -1520,16 +1583,24 @@ footer {
     border-bottom: 0;
   }
 
+  /* Instagram remains visible */
   .instagram-btn {
-    display: none;
+    display: inline-flex;
+
+    flex-shrink: 0;
+
+    padding: 7px 9px;
+
+    font-size: 9px;
   }
 
 
-  /* GENERAL */
+  /* -----------------------------------------
+     GENERAL
+  ----------------------------------------- */
 
   .section {
     width: 90%;
-
     padding: 70px 0;
   }
 
@@ -1546,7 +1617,9 @@ footer {
   }
 
 
-  /* HERO */
+  /* -----------------------------------------
+     HERO
+  ----------------------------------------- */
 
   .hero {
     width: 90%;
@@ -1619,11 +1692,12 @@ footer {
   }
 
 
-  /* INTRO */
+  /* -----------------------------------------
+     INTRO
+  ----------------------------------------- */
 
   .intro {
     grid-template-columns: 1fr;
-
     gap: 25px;
   }
 
@@ -1632,7 +1706,9 @@ footer {
   }
 
 
-  /* MENU */
+  /* -----------------------------------------
+     MENU
+  ----------------------------------------- */
 
   .section-heading {
     margin-bottom: 35px;
@@ -1645,12 +1721,13 @@ footer {
   .menu-grid,
   .signature-grid {
     grid-template-columns: 1fr;
-
     gap: 18px;
+
+    align-items: start;
   }
 
   .menu-photo {
-    height: 240px;
+    height: 250px;
   }
 
   .menu-card-body {
@@ -1663,12 +1740,13 @@ footer {
 
   .menu-note {
     align-items: flex-start;
-
     font-size: 11px;
   }
 
 
-  /* FILTER */
+  /* -----------------------------------------
+     FILTERS
+  ----------------------------------------- */
 
   .filter-bar {
     overflow-x: auto;
@@ -1689,14 +1767,37 @@ footer {
   }
 
 
-  /* SIGNATURE */
+  /* -----------------------------------------
+     SIGNATURE PRODUCTS
+  ----------------------------------------- */
+
+  .signature-grid {
+    width: 100%;
+  }
+
+  .signature-card {
+    width: 100%;
+    height: auto;
+    align-self: start;
+  }
 
   .signature-photo {
-    height: 280px;
+    width: 100%;
+    height: 285px;
+  }
+
+  .signature-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
   }
 
   .signature-body {
+    width: 100%;
     padding: 20px;
+    height: auto;
   }
 
   .signature-body h3 {
@@ -1708,19 +1809,19 @@ footer {
   }
 
 
-  /* GALLERY */
+  /* -----------------------------------------
+     GALLERY
+  ----------------------------------------- */
 
   .gallery {
     grid-template-columns: 1fr;
-
     gap: 18px;
   }
 
   .product,
   .product.large {
     grid-row: auto;
-
-    min-height: 430px;
+    min-height: 410px;
   }
 
   .product-info {
@@ -1732,26 +1833,32 @@ footer {
   }
 
 
-  /* LATEST */
+  /* -----------------------------------------
+     LATEST
+  ----------------------------------------- */
 
   .latest-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 10px;
   }
 
+  .latest-grid img {
+    aspect-ratio: 1 / 1;
+  }
+
   .latest-grid figcaption {
     padding: 10px;
-
     font-size: 10px;
   }
 
 
-  /* FEATURE */
+  /* -----------------------------------------
+     FEATURE
+  ----------------------------------------- */
 
   .feature {
     grid-template-columns: 1fr;
-
     gap: 40px;
   }
 
@@ -1759,12 +1866,17 @@ footer {
     border-radius: 150px 150px 25px 25px;
   }
 
+  .feature-image img {
+    aspect-ratio: 0.9;
+  }
 
-  /* OCCASIONS */
+
+  /* -----------------------------------------
+     OCCASIONS
+  ----------------------------------------- */
 
   .occasion-grid {
     grid-template-columns: 1fr 1fr;
-
     gap: 12px;
   }
 
@@ -1774,12 +1886,13 @@ footer {
 
   .occasion-card strong {
     margin-top: 25px;
-
     font-size: 22px;
   }
 
 
-  /* BULK */
+  /* -----------------------------------------
+     BULK
+  ----------------------------------------- */
 
   .bulk {
     grid-template-columns: 1fr;
@@ -1794,7 +1907,7 @@ footer {
   }
 
   .bulk-visual img {
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 1;
   }
 
   .stall-box {
@@ -1810,11 +1923,12 @@ footer {
   }
 
 
-  /* ABOUT */
+  /* -----------------------------------------
+     ABOUT
+  ----------------------------------------- */
 
   .about {
     grid-template-columns: 1fr;
-
     gap: 45px;
   }
 
@@ -1828,11 +1942,12 @@ footer {
   }
 
 
-  /* ORDER */
+  /* -----------------------------------------
+     ORDER
+  ----------------------------------------- */
 
   .order {
     grid-template-columns: 1fr;
-
     gap: 40px;
   }
 
@@ -1842,7 +1957,6 @@ footer {
 
   #orderForm {
     padding: 22px;
-
     border-radius: 24px;
   }
 
@@ -1858,7 +1972,9 @@ footer {
   }
 
 
-  /* FOOTER */
+  /* -----------------------------------------
+     FOOTER
+  ----------------------------------------- */
 
   footer {
     padding: 45px 6vw 25px;
@@ -1878,7 +1994,9 @@ footer {
   }
 
 
-  /* WHATSAPP */
+  /* -----------------------------------------
+     WHATSAPP
+  ----------------------------------------- */
 
   .whatsapp-float {
     right: 15px;
@@ -1887,7 +2005,6 @@ footer {
     width: 54px;
     height: 54px;
   }
-
 }
 
 
@@ -1897,17 +2014,32 @@ footer {
 
 @media (max-width: 390px) {
 
+  .site-header {
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: 5px;
+  }
+
+  .brand {
+    gap: 5px;
+  }
+
   .brand img {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
   }
 
   .brand span {
-    font-size: 23px;
+    font-size: 21px;
+  }
+
+  .instagram-btn {
+    padding: 6px 7px;
+    font-size: 8px;
   }
 
   .menu-btn {
-    font-size: 25px;
+    font-size: 24px;
   }
 
   .hero {
@@ -1939,6 +2071,9 @@ footer {
     height: 260px;
   }
 
+  .signature-photo {
+    height: 260px;
+  }
 }
 
 
@@ -1959,53 +2094,14 @@ footer {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
 }
 
-/* FULL IMAGE VISIBILITY FIX */
-.signature-photo {
-  width: 100%;
-  height: 320px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.signature-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-/* Keep Instagram visible on phones */
-@media (max-width: 1050px) {
-  .instagram-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    padding: 8px 10px;
-    font-size: 10px;
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 390px) {
-  .instagram-btn {
-    padding: 7px 8px;
-    font-size: 9px;
-  }
-}
 
 /* =========================================
-   IMAGE CROPPING — ORIGINAL PHOTOS
-   ========================================= */
+   IMAGE BEHAVIOUR
+========================================= */
 
-/* Keep the original photos untouched.
-   These rules only control how they appear inside the website cards. */
-
+/* Normal website images */
 .menu-photo img,
 .signature-photo img,
 .product img,
@@ -2017,40 +2113,12 @@ footer {
   object-position: center center;
 }
 
-/* Don't crop the main hero image — show it completely. */
+/* Hero image should remain completely visible */
 .arch img {
   object-fit: contain;
 }
 
-/* Keep the enlarged lightbox image completely visible. */
+/* Lightbox should show complete image */
 .lightbox img {
   object-fit: contain;
-}
-
-/* Better framing on phones */
-@media (max-width: 760px) {
-  .menu-photo {
-    height: 250px;
-  }
-
-  .signature-photo {
-    height: 285px;
-  }
-
-  .product,
-  .product.large {
-    min-height: 410px;
-  }
-
-  .latest-grid img {
-    aspect-ratio: 1 / 1;
-  }
-
-  .feature-image img {
-    aspect-ratio: 0.9;
-  }
-
-  .bulk-visual img {
-    aspect-ratio: 1 / 1;
-  }
 }
