@@ -477,7 +477,8 @@ em {
 .menu-photo img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 }
 
 .menu-card-body {
@@ -642,7 +643,8 @@ em {
 .signature-photo img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 
   cursor: zoom-in;
 
@@ -810,7 +812,8 @@ em {
   width: 100%;
   height: 100%;
 
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 
   transition: transform 0.6s ease;
 }
@@ -872,7 +875,8 @@ em {
 
 .latest-grid img {
   aspect-ratio: 1;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 
   cursor: zoom-in;
 
@@ -913,7 +917,8 @@ em {
 
 .feature-image img {
   aspect-ratio: 0.9;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 }
 
 .feature-copy p:not(.eyebrow) {
@@ -1003,7 +1008,8 @@ em {
 
 .bulk-visual img {
   aspect-ratio: 0.9;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 }
 
 .bulk-copy > p:not(.eyebrow) {
@@ -1105,7 +1111,8 @@ em {
   width: 65%;
   height: 390px;
 
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 
   border-radius: 25px;
 
@@ -1989,5 +1996,61 @@ footer {
   .instagram-btn {
     padding: 7px 8px;
     font-size: 9px;
+  }
+}
+
+/* =========================================
+   IMAGE CROPPING — ORIGINAL PHOTOS
+   ========================================= */
+
+/* Keep the original photos untouched.
+   These rules only control how they appear inside the website cards. */
+
+.menu-photo img,
+.signature-photo img,
+.product img,
+.latest-grid img,
+.feature-image img,
+.bulk-visual img,
+.about-stack img {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Don't crop the main hero image — show it completely. */
+.arch img {
+  object-fit: contain;
+}
+
+/* Keep the enlarged lightbox image completely visible. */
+.lightbox img {
+  object-fit: contain;
+}
+
+/* Better framing on phones */
+@media (max-width: 760px) {
+  .menu-photo {
+    height: 250px;
+  }
+
+  .signature-photo {
+    height: 285px;
+  }
+
+  .product,
+  .product.large {
+    min-height: 410px;
+  }
+
+  .latest-grid img {
+    aspect-ratio: 1 / 1;
+  }
+
+  .feature-image img {
+    aspect-ratio: 0.9;
+  }
+
+  .bulk-visual img {
+    aspect-ratio: 1 / 1;
   }
 }
